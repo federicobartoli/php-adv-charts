@@ -9,9 +9,17 @@
           <script src="dist/js/Chart.min.js" charset="utf-8"></script>
      </head>
      <body>
+          <div class="container-fluid">
+               <div class="container">
+                    <h1>MileStone 1</h1>
+                    <canvas id="myChart"></canvas>
+                    <h1>MileStone 2</h1>
+                    <canvas id="myGraph-line-2"></canvas>
+                    <canvas id="myGraph-pie"></canvas>
+               </div>
+          </div>
 
 
-          <canvas id="myChart"></canvas>
 
 
           <script src="dist/js/main.js" charset="utf-8"></script>

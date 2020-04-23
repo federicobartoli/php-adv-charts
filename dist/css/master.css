@@ -3,3 +3,23 @@
      padding: 0;
      box-sizing: border-box;
 }
+
+.container-fluid{
+     width: 100vw;
+     display: flex;
+
+     justify-content: center;
+     align-items: center;
+}
+
+.container{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 800px;
+
+}
+canvas{
+     margin-bottom: 50px;
+}

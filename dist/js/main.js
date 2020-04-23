@@ -1,23 +1,77 @@
 $(document).ready(function () {
 
-     $.ajax({
-          url: 'server.php',
-          method: 'GET',
-          success: function (response) {
-               var dati = response;
-               console.log(dati);
-               creaGrafico(dati, moment.months())
-          },
-          error : function (error) {
-               console.log('ERRORE');
-          }
-     })
+     var serverUno = 'server.php'
+     var serverDue = 'server2.php'
+     var ctx1 = '#myChart';
+     var ctx2 = '#myGraph-line-2';
+     var ctx3 = '#myGraph-pie';
+     var mesiAnno = moment.months()
+     ajaxCall(serverUno,mesiAnno, ctx1, 'line')
+     ajaxCall(serverDue,mesiAnno, ctx2)
+     ajaxCallPie(serverDue,ctx3)
 
 
-     function creaGrafico(dataNumbers, labelsName) {
-          var ctx = $('#myChart');
+
+     function ajaxCallPie(server,variabile) {
+          $.ajax({
+               url: server,
+               method: 'GET',
+               success: function (response) {
+                    var dati = response;
+                    var datiPie = [];
+                    var labels = [];
+                    console.log(dati['fatturato_by_agent'].type);
+                    var typeChart = dati['fatturato_by_agent'].type
+                    var dataBaseAgentiNumeri = dati['fatturato_by_agent'].data;
+                    console.log(dataBaseAgentiNumeri);
+                    for (var variable in dataBaseAgentiNumeri) {
+                         console.log(variable);
+                         labels.push(variable)
+                         console.log(dataBaseAgentiNumeri[variable]);
+                         datiPie.push(dataBaseAgentiNumeri[variable])
+                    };
+
+
+
+                    creaGrafico(datiPie, labels, variabile, typeChart)
+
+               },
+               error : function (error) {
+                    console.log('ERRORE');
+               }
+          })
+     }
+
+
+
+
+
+     function ajaxCall(server,labels,variabile, typeChart) {
+          $.ajax({
+               url: server,
+               method: 'GET',
+               success: function (response) {
+                    var dati = response;
+                    if (dati['fatturato']) {
+                         console.log(dati['fatturato'].type);
+                         typeChart = dati['fatturato'].type
+                         console.log(dati['fatturato'].data);
+                         dati = dati['fatturato'].data
+                    }
+
+                    creaGrafico(dati, labels, variabile, typeChart)
+               },
+               error : function (error) {
+                    console.log('ERRORE');
+               }
+          })
+     }
+
+
+     function creaGrafico(dataNumbers, labelsName, ctx, typeChart) {
+          var ctx = $(ctx);
           var myChart = new Chart(ctx, {
-         type: 'line',
+         type: typeChart,
          data: {
              labels: labelsName,
              datasets: [{
