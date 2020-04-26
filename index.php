@@ -16,6 +16,35 @@
                     <h1>MileStone 2</h1>
                     <canvas id="myGraph-line-2"></canvas>
                     <canvas id="myGraph-pie"></canvas>
+                    <?php include 'data3.php';
+                    // foreach ($graphs as $key => $value) {
+                    //      echo $value["access"];
+                    // }
+                    $accesso_inserito = $_GET['level'];
+
+                     ?>
+                    <h1>MileStone 3</h1>
+                    <?php
+                    if ($accesso_inserito == 'guest') {
+                         echo '<canvas id="myGraph-line-3"></canvas>';
+                    }
+                     if ($accesso_inserito == 'employee') {
+                         echo '<canvas id="myGraph-line-3"></canvas>
+                          <canvas id="myGraph-line-4"></canvas>';
+                    }
+                    if ($accesso_inserito == 'clevel') {
+                         echo '<canvas id="myGraph-line-3"></canvas>
+                          <canvas id="myGraph-line-4"></canvas>
+                          <canvas id="myGraph-line-5"></canvas>';
+                    }else {
+                         echo '<h2>Chiave sbagliata</h2>';
+                    }  ?>
+
+
+
+
+
+
                </div>
           </div>
 
