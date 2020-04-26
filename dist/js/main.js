@@ -1,15 +1,18 @@
 $(document).ready(function () {
 
-     var serverUno = 'server.php'
-     var serverDue = 'server2.php'
-     var serverTre = 'server3.php'
+     var serverUno = 'server.php'; //Chiamata al server 1
+     var serverDue = 'server2.php'; //Chiamata al server 2
+     var serverTre = 'server3.php'; // Chiamata al server 3
+     //I ctx sono i contesti, vado a prendere nel DOM i miei canvas da far riempire a ChartJs
      var ctx1 = '#myChart';
      var ctx2 = '#myGraph-line-2';
      var ctx3 = '#myGraph-pie';
      var ctx4 = '#myGraph-line-3';
      var ctx5 = '#myGraph-line-4';
      var ctx6 = '#myGraph-line-5';
-     var mesiAnno = moment.months()
+     // Con moment mi creo un array con tutti i mesi dell'anno
+     var mesiAnno = moment.months();
+     //Queste sono mie funzioni che vanno a fare una determinata chiamata ajax con dei dati in ingresso e a loro volta vanno ad attivare la funzione che crea il grafico.
      ajaxCall(serverUno,mesiAnno, ctx1, 'line')
      ajaxCall(serverDue,mesiAnno, ctx2)
      ajaxCallPie(serverDue,ctx3)
@@ -27,10 +30,8 @@ $(document).ready(function () {
                     var dati = response;
                     var datiPie = [];
                     var labels = [];
-
                     var typeChart = dati['fatturato_by_agent'].type
                     var dataBaseAgentiNumeri = dati['fatturato_by_agent'].data;
-
                     for (var variable in dataBaseAgentiNumeri) {
 
                          labels.push(variable)
